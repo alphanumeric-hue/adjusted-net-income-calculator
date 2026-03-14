@@ -303,7 +303,7 @@ podman-compose -f podman-compose.yml build
 
 ## Creating a Release (Repo Owner)
 
-Releases are triggered automatically when a PR is merged into `main` with a release label. The version is bumped based on the label, a git tag is created, and the full release pipeline runs.
+Releases are triggered automatically when a PR is merged into `main` with a release label. The version is bumped based on the label, a git tag is created, and the full release pipeline runs. Work usually occurs on `dev` before being merged to `main`
 
 ### Release workflow
 
