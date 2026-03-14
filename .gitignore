@@ -1,0 +1,32 @@
+
+# Claude
+settings.local.json
+.claude/agent-memory/
+
+# App specific
+backend/internal/database/generated/
+*.log
+
+# Node
+node_modules/
+dist/
+.pnpm-store/
+
+# Go
+*.exe
+*.test
+/vendor/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db

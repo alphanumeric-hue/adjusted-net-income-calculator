@@ -1,0 +1,7 @@
+-- +goose Up
+ALTER TABLE users ADD COLUMN is_admin BOOLEAN NOT NULL DEFAULT FALSE;
+ALTER TABLE users ADD COLUMN force_password_reset BOOLEAN NOT NULL DEFAULT FALSE;
+
+-- +goose Down
+ALTER TABLE users DROP COLUMN IF EXISTS force_password_reset;
+ALTER TABLE users DROP COLUMN IF EXISTS is_admin;

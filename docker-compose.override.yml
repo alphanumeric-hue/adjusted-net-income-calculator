@@ -1,0 +1,18 @@
+# Development overrides — automatically merged with docker-compose.yml by Docker Compose.
+# This file adds build-from-source directives for local development.
+#
+# To use pre-built images from ghcr.io instead of building locally:
+#   mv docker-compose.override.yml docker-compose.override.yml.bak
+#   docker compose up -d
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
