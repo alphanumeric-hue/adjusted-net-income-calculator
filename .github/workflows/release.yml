@@ -65,11 +65,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Pin image tags to release version
+        run: |
+          sed "s/:latest/:${{ github.ref_name }}/g" docker-compose.yml > docker-compose-release.yml
+          sed "s/:latest/:${{ github.ref_name }}/g" podman-compose.yml > podman-compose-release.yml
+
       - name: Create GitHub Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: >
           gh release create ${{ github.ref_name }}
-          docker-compose.yml .env.example
+          docker-compose-release.yml#docker-compose.yml
+          podman-compose-release.yml#podman-compose.yml
+          .env.example
           --title "${{ github.ref_name }}"
           --generate-notes
