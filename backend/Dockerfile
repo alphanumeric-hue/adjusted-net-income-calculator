@@ -1,9 +1,16 @@
 # ============================================================
-# Stage 1: Source — resolve modules with all source code
+# Stage 1: Generate — produce sqlc code from SQL sources
+# ============================================================
+FROM sqlc/sqlc:1.27.0 AS sqlc
+
+# ============================================================
+# Stage 2: Source — resolve modules with all source code
 # ============================================================
 FROM golang:1.22-alpine AS source
 WORKDIR /app
 COPY . .
+COPY --from=sqlc /workspace/sqlc /usr/local/bin/sqlc
+RUN sqlc generate
 RUN go mod tidy && go mod download
 
 # ============================================================
