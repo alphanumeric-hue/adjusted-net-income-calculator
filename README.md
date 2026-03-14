@@ -16,6 +16,19 @@ This tool has been made using Claude. You should not rely on the accuracy of thi
 
 ## Usage
 
+### From a release (recommended)
+
+1. Go to the [Releases](https://github.com/alphanumeric-hue/adjusted-net-income-calculator/releases) page and download `docker-compose.yml` and `.env.example` from the latest release into an empty directory. The compose file is pre-configured to pull the matching versioned images from GHCR.
+2. Copy `.env.example` to `.env` and open it — at minimum change `SESSION_SECRET` to a long random string.
+3. Start the app:
+
+```bash
+docker compose up -d
+# Access at http://localhost
+```
+
+### From source
+
 ```bash
 # 1. Clone the repository
 git clone https://github.com/alphanumeric-hue/adjusted-net-income-calculator.git
@@ -25,13 +38,15 @@ cd adjusted-net-income-calculator
 cp .env.example .env
 # Edit .env — at minimum, change SESSION_SECRET to a long random string
 
-# 3. Remove the development override file so pre-built images are used
-mv docker-compose.override.yml docker-compose.override.yml.bak
-
-# 4. Pull images and start
-docker compose up -d
+# 3. Build and start (tests run automatically as part of the build)
+docker compose up -d --build
 
 # Access at http://localhost
+```
+
+### Stopping the app
+
+```bash
 # Stop (data persists in pgdata volume)
 docker compose down
 
